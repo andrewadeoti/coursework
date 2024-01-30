@@ -24,7 +24,7 @@ HEADERS += \
 SOURCES += \
     src/earth.cpp \
     src/geometry.cpp \
-    src/nand/nand-parser-ideal.cpp \
+    src/nand/nand-parser.cpp \
     src/waypoint.cpp
 
 SOURCES += \
