@@ -4,6 +4,7 @@
 
 #include "nand/nand-parser.h"
 
+
 namespace GPS::NAND
 {
   bool isRecognisedCode(std::string)
