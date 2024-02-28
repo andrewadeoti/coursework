@@ -1,10 +1,7 @@
 // #include <iostream> // For debugging
 #include <stdexcept>
 #include <string>
-
 #include "nand/nand-parser.h"
-
-
 namespace GPS::NAND
 {
   bool isRecognisedCode(std::string)
@@ -12,7 +9,6 @@ namespace GPS::NAND
       // Stub definition, needs implementing
       return false;
   }
-
   bool hasFormOfNANDdataEntry(std::string s)
   {
       char c;
@@ -69,25 +65,21 @@ namespace GPS::NAND
       // Ken: But indexing normally starts at 0, and we normally use <. So why is this different?
       return true;
   }
-
   bool verifyChecksum(std::string)
   {
       // Stub definition, needs implementing
       return false;
   }
-
   NAND::DataEntry parseDataEntry(std::string)
   {
       // Stub definition, needs implementing
       return {"", {}};
   }
-
   bool hasExpectedNumberOfFields(NAND::DataEntry)
   {
       // Stub definition, needs implementing
       return false;
   }
-
   Waypoint dataEntryToWaypoint(NAND::DataEntry d)
   {
       using namespace std; // Ken: Writing 'std::' everywhere is irritating.
@@ -153,7 +145,6 @@ namespace GPS::NAND
                   {
                       if (onPrime == true)
                       {
-
                       }
                       else
                       {
@@ -210,7 +201,6 @@ namespace GPS::NAND
                   {
                       if (onPrime == true)
                       {
-
                       }
                       else
                       {
@@ -334,7 +324,6 @@ namespace GPS::NAND
                   {
                       if (onPrime == true)
                       {
-
                       }
                       else
                       {
@@ -391,7 +380,6 @@ namespace GPS::NAND
                   {
                       if (onPrime == true)
                       {
-
                       }
                       else
                       {
@@ -452,11 +440,9 @@ namespace GPS::NAND
       }
       return w;
   }
-
   std::vector<Waypoint> processDataLog(std::istream&)
   {
       // Stub definition, needs implementing
       return {};
   }
-
 }
