@@ -4,67 +4,67 @@
 #include "nand/nand-parser.h"
 namespace GPS::NAND
 {
-  bool isRecognisedCode(std::string)
-  {
-      // Stub definition, needs implementing
-      return false;
-  }
-  bool hasFormOfNANDdataEntry(std::string s)
-  {
-      char c;
-      unsigned int i;
-      if (s.empty()) return false; // Need this or next line could crash
-      if (s[0] != '~') return false;
-      if (s.size() < 5) return false; // Need this or next line could crash
-      // cout << "Debug A" << endl;
-      c = s[1];
-      if (c < 65 || c > 90) return false;
-      c = s[2];
-      if (c < 65 || c > 90) return false;
-      c = s[3];
-      if (c < 65 || c > 90) return false;
-      c = s[4];
-      if (c < 'A' || c > 'Z') return false; // Hey Ken: we can do it like this instead of using the ASCII codes.  Shall I change the previous two like this as well?
-      // cout << "Debug B" << endl;
-      if (s.size() < 6) return false; // Need this or next line could crash.
-      if (s[5] != '|') return false;
-      // cout << "Debug C" << endl;
-      /*
-      i = 6;
-      while (true)
-      {
-          if (i == s.size()) return false;
-          if (s[i] == '~') return false; // Not allowed here.
-          if (s[i] == ';') break;
-          ++i;
-      }
-      */
-      // Nadia: for-loop is better.
-      for (i = 6; true; ++i)
-      {
-          if (i == s.size()) return false;
-          if (s[i] == '~') return false; // Not allowed here.
-          if (s[i] == ';') return false; // Not allowed here.
-          if (s[i] == '|') break;
-      }
-      // cout << "Debug D" << endl;
-      if (s.size() < i+4) return false; // Note: i+4 NOT i+3.  This is confusing.
-      c = s[i+1];
-      if ((c < 48) || (c > 57)) return false;
-      c = s[i+2];
-      if ((c < 48) || (c > 57)) return false;
-      c = s[i+3];
-      if ((c < 48) || (c > 57)) return false;
-      // cout << "Debug E" << endl;
-      // cout << s.size() << endl;
-      // cout << i << endl;
-      if (s[i+4] != ';') return false;
-      if (s.size() != i+5) return false; // Note: i+5 NOT i+4.  This is confusing.
-      // Alice: It's because indexing starts at 0, so the index number is one less.
-      // Nadia: No, it's because we're using '<' rather than '<='.  We need a char at i+4, so we say < i+5.
-      // Ken: But indexing normally starts at 0, and we normally use <. So why is this different?
-      return true;
-  }
+// Helper function to check if a string is one of the recognized formats
+bool isRecognizedCode(const std::string& code) {
+  static const std::vector<std::string> formats = {"NEIL", "ALIS", "NUNO", "DAVE"};
+  return std::find(formats.begin(), formats.end(), code) != formats.end();
+}
+
+bool hasFormOfNANDdataEntry(std::string s)
+{
+    char c;
+    unsigned int i;
+    if (s.empty()) return false; // Need this or next line could crash
+    if (s[0] != '~') return false;
+    if (s.size() < 5) return false; // Need this or next line could crash
+    // cout << "Debug A" << endl;
+    c = s[1];
+    if (c < 65 || c > 90) return false;
+    c = s[2];
+    if (c < 65 || c > 90) return false;
+    c = s[3];
+    if (c < 65 || c > 90) return false;
+    c = s[4];
+    if (c < 'A' || c > 'Z') return false; // Hey Ken: we can do it like this instead of using the ASCII codes.  Shall I change the previous two like this as well?
+    // cout << "Debug B" << endl;
+    if (s.size() < 6) return false; // Need this or next line could crash.
+    if (s[5] != '|') return false;
+    // cout << "Debug C" << endl;
+    /*
+    i = 6;
+    while (true)
+    {
+        if (i == s.size()) return false;
+        if (s[i] == '~') return false; // Not allowed here.
+        if (s[i] == ';') break;
+        ++i;
+    }
+    */
+    // Nadia: for-loop is better.
+    for (i = 6; true; ++i)
+    {
+        if (i == s.size()) return false;
+        if (s[i] == '~') return false; // Not allowed here.
+        if (s[i] == ';') return false; // Not allowed here.
+        if (s[i] == '|') break;
+    }
+    // cout << "Debug D" << endl;
+    if (s.size() < i+4) return false; // Note: i+4 NOT i+3.  This is confusing.
+    c = s[i+1];
+    if ((c < 48) || (c > 57)) return false;
+    c = s[i+2];
+    if ((c < 48) || (c > 57)) return false;
+    c = s[i+3];
+    if ((c < 48) || (c > 57)) return false;
+    // cout << "Debug E" << endl;
+    // cout << s.size() << endl;
+    // cout << i << endl;
+    if (s[i+4] != ';') return false;
+    if (s.size() != i+5) return false; // Note: i+5 NOT i+4.  This is confusing.
+
+    return true;
+}
+
   bool verifyChecksum(std::string)
   {
       // Stub definition, needs implementing
@@ -446,4 +446,4 @@ namespace GPS::NAND
       return {};
   }
 }
-//can not seem to get it to work
+
