@@ -80,21 +80,25 @@ bool hasFormOfNANDdataEntry(std::string s & dataEntry)
     }
 }
 
-bool verifyChecksum(std::string)
+bool verifyChecksum(std::string&)
 {
-  // Stub definition, needs implementing
-  return false;
+    // Stub definition, needs implementing
+    return false;
 }
-  NAND::DataEntry parseDataEntry(std::string)
-  {
-      // Stub definition, needs implementing
-      return {"", {}};
+NAND::DataEntry parseDataEntry(std::string)
+{
+    // Stub definition, needs implementing
+    return {"", {}};
+}
+// **parseDataEntry:**
+// - Delegates format-specific parsing using a switch statement.
+// - Error handling within each case for invalid data fields.
+NAND::DataEntry parseDataEntry(const std::string& dataEntry) {
+  if (!hasFormOfNANDDataEntry(dataEntry)) {
+    throw std::domain_error("Invalid data entry format");
   }
-  bool hasExpectedNumberOfFields(NAND::DataEntry)
-  {
-      // Stub definition, needs implementing
-      return false;
-  }
+
+
   Waypoint dataEntryToWaypoint(NAND::DataEntry d)
   {
       using namespace std; // Ken: Writing 'std::' everywhere is irritating.
