@@ -66,7 +66,7 @@ bool hasFormOfNANDdataEntry(std::string s & dataEntry)
     if (s.size() != i+5) return false; // Note: i+5 NOT i+4.  This is confusing.
 
     return true;
-
+// to see if the entered dat is empty
     if (dataEntry.empty()) {
         return false;
     }
@@ -80,11 +80,11 @@ bool hasFormOfNANDdataEntry(std::string s & dataEntry)
     }
 }
 
-  bool verifyChecksum(std::string)
-  {
-      // Stub definition, needs implementing
-      return false;
-  }
+bool verifyChecksum(std::string)
+{
+  // Stub definition, needs implementing
+  return false;
+}
   NAND::DataEntry parseDataEntry(std::string)
   {
       // Stub definition, needs implementing
