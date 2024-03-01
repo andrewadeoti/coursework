@@ -12,7 +12,7 @@ bool isRecognizedCode(const std::string& code) {
 }
 
 
-bool hasFormOfNANDdataEntry(std::string s & dataEntry)
+bool hasFormOfNANDdataEntry(std::string s & std::dataEntry)
 // The function hasFormOfNANDdataEntry checks if a given string has a valid format for a GPS waypoint in a NAND format.
 {
     char c;
@@ -32,6 +32,19 @@ bool hasFormOfNANDdataEntry(std::string s & dataEntry)
     // cout << "Debug B" << endl;
     if (s.size() < 6) return false; // Need this or next line could crash.
     if (s[5] != '|') return false;
+
+    // to see if the entered dat is empty
+        if (dataEntry.empty()) {
+            return false;
+        }
+        if (dataEntry[0] != '~'){
+            return false;
+        }
+        for (size_t i = 1; i < dataEntry.size() - 2; ++i){
+            if (dataEntry[i] == '~' || dataEntry[i] == ';'){
+                return false;{}
+            }
+        } // failed at additional function.
     // cout << "Debug C" << endl;
     /*
     i = 6;
@@ -66,18 +79,7 @@ bool hasFormOfNANDdataEntry(std::string s & dataEntry)
     if (s.size() != i+5) return false; // Note: i+5 NOT i+4.  This is confusing.
 
     return true;
-// to see if the entered dat is empty
-    if (dataEntry.empty()) {
-        return false;
-    }
-    if (dataEntry[0] != '~'){
-        return false;
-    }
-    for (size_t i = 1; i < dataEntry.size() - 2; ++i){
-        if (dataEntry[i] == '~' || dataEntry[i] == ';'){
-            return false;{}
-        }
-    }
+
 }
 
 bool verifyChecksum(std::string&)
@@ -85,14 +87,7 @@ bool verifyChecksum(std::string&)
     // Stub definition, needs implementing
     return false;
 }
-NAND::DataEntry parseDataEntry(std::string)
-{
-    // Stub definition, needs implementing
-    return {"", {}};
-}
-// **parseDataEntry:**
-// - Delegates format-specific parsing using a switch statement.
-// - Error handling within each case for invalid data fields.
+
 NAND::DataEntry parseDataEntry(const std::string& dataEntry) {
   if (!hasFormOfNANDDataEntry(dataEntry)) {
     throw std::domain_error("Invalid data entry format");
