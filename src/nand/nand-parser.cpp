@@ -65,10 +65,35 @@ namespace GPS::NAND
       // Ken: But indexing normally starts at 0, and we normally use <. So why is this different?
       return true;
   }
-  bool verifyChecksum(std::string)
+  bool verifyChecksum(std::string input)
   {
-      // Stub definition, needs implementing
-      return false;
+      if (input.empty() || input.size() < 11 || input[0] != '~' || input[5] != '|' || input[input.size() - 1] != ';')
+      {
+          return false;
+      }
+
+      // Extract the checksum part
+      std::string checksumStr = input.substr(input.size() - 4, 3);
+
+      try
+      {
+          int checksum = std::stoi(checksumStr);
+
+          // Calculate the expected checksum
+          int expectedChecksum = 0;
+          for (size_t i = 1; i < input.size() - 5; ++i)
+          {
+              expectedChecksum += static_cast<int>(input[i]);
+          }
+
+          // Compare the calculated checksum with the expected checksum
+          return checksum == expectedChecksum % 1000;
+      }
+      catch (const std::invalid_argument&)
+      {
+          // Conversion to integer failed
+          return false;
+      }
   }
   NAND::DataEntry parseDataEntry(std::string)
   {
