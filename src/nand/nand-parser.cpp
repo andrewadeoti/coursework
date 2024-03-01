@@ -9,6 +9,8 @@ bool isRecognizedCode(const std::string& code) {
   static const std::vector<std::string> formats = {"NEIL", "ALIS", "NUNO", "DAVE"};
   return std::find(formats.begin(), formats.end(), code) != formats.end();
 }
+//only editted part
+
 
 bool hasFormOfNANDdataEntry(std::string s)
 {
