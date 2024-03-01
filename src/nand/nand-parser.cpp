@@ -113,11 +113,22 @@ namespace GPS::NAND
   NAND::DataEntry parseDataEntry(std::string)
   {
       // Stub definition, needs implementing
-      return {"", {}};
+      return {"",};
   }
-  bool hasExpectedNumberOfFields(NAND::DataEntry)
-  {
-      // Stub definition, needs implementing
+  bool hasExpectedNumberOfFields(const DataEntry&dataEntry) {
+      const std::string& code = dataEntry.code;
+      const std::vector<std::string>& fields = dataEntry.fields;
+
+      if (code == "NEIL" && fields.size() == 3) {
+          return true;
+      } else if (code == "ALIS" && fields.size() == 5) {
+          return true;
+      } else if (code == "NUNO" && fields.size() == 4) {
+          return true;
+      } else if (code == "DAVE" && fields.size() == 6) {
+          return true;
+      }
+
       return false;
   }
   Waypoint dataEntryToWaypoint(NAND::DataEntry d)
