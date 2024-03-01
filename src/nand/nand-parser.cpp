@@ -1,6 +1,7 @@
 // #include <iostream> // For debugging
 #include <stdexcept>
 #include <string>
+#include <vector>
 #include "nand/nand-parser.h"
 namespace GPS::NAND
 {
@@ -12,7 +13,7 @@ bool isRecognizedCode(const std::string& code) {
 //only editted part
 
 
-bool hasFormOfNANDdataEntry(std::string s)
+bool hasFormOfNANDdataEntry(std::string s & dataEntry)
 {
     char c;
     unsigned int i;
@@ -65,6 +66,18 @@ bool hasFormOfNANDdataEntry(std::string s)
     if (s.size() != i+5) return false; // Note: i+5 NOT i+4.  This is confusing.
 
     return true;
+
+    if (dataEntry.empty()) {
+        return false;
+    }
+    if (dataEntry[0] != '~'){
+        return false;
+    }
+    for (size_t i = 1; i < dataEntry.size() - 2; ++i){
+        if (dataEntry[i] == '~' || dataEntry[i] == ';'){
+            return false;{}
+        }
+    }
 }
 
   bool verifyChecksum(std::string)
