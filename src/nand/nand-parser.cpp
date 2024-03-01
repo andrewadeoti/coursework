@@ -7,12 +7,9 @@ namespace GPS::NAND
 {
  Helper function to check if a string is one of the recognized formats
 bool isRecognizedCode(const std::string& code) {
-  //static const std::vector<std::string> formats = {"NEIL", "ALIS", "NUNO", "DAVE"};
-  //return std::find(formats.begin(), formats.end(), code) != formats.end();
+  static const std::vector<std::string> formats = {"NEIL", "ALIS", "NUNO", "DAVE"};
+  return std::find(formats.begin(), formats.end(), code) != formats.end();
 }
-//only editted part
-
-
 
 
 bool hasFormOfNANDdataEntry(std::string s & dataEntry)
