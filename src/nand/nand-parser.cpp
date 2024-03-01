@@ -4,11 +4,26 @@
 #include "nand/nand-parser.h"
 namespace GPS::NAND
 {
-  bool isRecognisedCode(std::string)
-  {
-      // Stub definition, needs implementing
-      return false;
-  }
+
+        bool isRecognisedCode(const std::string& code) {
+            // Check if the code is of valid length
+            if (code.length() != 4) {
+                return false;
+            }
+
+            // Check if all characters are uppercase
+            for (char c : code) {
+                if (!std::isupper(c)) {
+                    return false;
+                }
+            }
+
+            // Check if the code is one of the recognized codes
+            return (code == "NEIL" || code == "ALIS" || code == "DAVE" || code == "NUNO");
+        }
+}
+
+
   bool hasFormOfNANDdataEntry(std::string s)
   {
       char c;
